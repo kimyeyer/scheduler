@@ -23,4 +23,4 @@ src/
 └── assets/                  # 정적 자산
     ├── images/
     └── css/
-        └── globals.css
+        └── globals.css# cal

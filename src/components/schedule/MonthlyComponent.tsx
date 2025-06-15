@@ -6,10 +6,12 @@ import interactionPlugin from '@fullcalendar/interaction';
 import koLocale from '@fullcalendar/core/locales/ko';
 
 import React from 'react'
+import { Calendar } from '@/components/calendar/Calendar';
 
 export const MonthlyComponent = () => {
   return (
-    <div>
+    <div className='flex flex-col'>
+      <Calendar  />
       <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"
