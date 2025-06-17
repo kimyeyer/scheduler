@@ -45,7 +45,11 @@ export const Calendar = () => {
                         </button>
                     </div>
                 </div>
-                <h4 className='flex-1 text-lg font-semibold text-center'>{format(selectedDate, 'yyyy년 MM월')}</h4>
+                <h4 className='flex-1 text-lg font-semibold text-center'>
+                    {
+                        viewMode === 'month'? format(selectedDate, 'yyyy년 MM월') : `${memoedWeekDates[0]} - ${memoedWeekDates[6]}`
+                    }
+                </h4>
                 <div className='flex items-center gap-1'>
                     {/* 버튼 제어 영역 */}
                     <button className='w-9 h-9 rounded-md flex items-center justify-center bg-white border border-gray-200 text-gray-600 hover:text-gray-900'>
@@ -64,22 +68,16 @@ export const Calendar = () => {
                             key={index} 
                             className={`p-3 text-center text-sm font-medium ${index === 5 ? 'text-blue-500' : index === 6 ? 'text-red-500' : 'text-gray-700'}`}
                         >
-                            {day}
+                            <div className='flex flex-col items-center justify-center'>
+                                <span>{day}</span>
+                                {viewMode === 'week' && (
+                                    <span>{memoedWeekDates[index]}</span>
+                                )}
+                            </div>
                         </div>
                     ))
                 }
-                
             </div>
-            {viewMode === 'week' && (
-                <div className='grid grid-cols-7 border-b border-gray-200'>
-                    {memoedWeekDates.map((day, index) => (
-                        <div key={index} className='p-3 text-center text-sm font-medium'>
-                            {day}
-                        </div>
-                    ))}
-                </div>
-
-            )}
             {/* 캘린더 영역 */}
             {viewMode === 'month' ? (
                 <MonthView selectedDate={selectedDate} handleDateClick={handleDateClick} />
@@ -141,10 +139,29 @@ const MonthView = ({selectedDate, handleDateClick}: ViewProps) => {
 }
 
 const WeekView = ({selectedDate, handleDateClick}: ViewProps) => {
+    const memoedWeekArray = useMemo(() => getWeekArray(selectedDate), [selectedDate]);
 
+    const timeArray = useMemo(() => {
+        const times = [];
+        for (let i = 0; i < 24; i++) {
+            times.push(`${i}:00`);
+        }
+        return times;
+    }, []);
+    console.log(timeArray);
     return (
         <>
-            <h1>주간 캘린더</h1>
+            <div>
+                {memoedWeekArray.map((day, index) => (
+                    <div key={index} className='grid grid-cols-7'>
+                        {timeArray.map((time, timeIndex) => (
+                            <div key={timeIndex} className='grid border-r border-gray-100' style={{gridTemplateRows: 'repeat(24, 1fr)'}}>
+                                {time}
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
         </>
     );
 }
