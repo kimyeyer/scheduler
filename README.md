@@ -1,26 +1,35 @@
-## 폴더 구조
+## 프로젝트 구조
+
+```
 src/
-├── components/              # 재사용 가능한 컴포넌트
-│   ├── calendar/            # 캘린더 관련 컴포넌트
-│   ├── routine/             # 루틴 관련 UI 컴포넌트
-│   └── common/              # 공통 UI 컴포넌트
+├── components/            # 재사용 가능한 컴포넌트
+│   ├── features/          # 
+│   │   └── calendar      # 캘린더 컴포넌트 관련 (타입, 컴포넌트...)
+│   │   └── routine        # 루틴 컴포넌트 관련 (타입, 컴포넌트...)
+│   │   └── schedule       # 일정 컴포넌트 관련 (타입, 컴포넌트...)
+│   └── common/            # 공통 UI 컴포넌트
+│       └── ...            # 탭, 프로그래스 , 모달 등
 │
-├── app/                     # 라우터 및 페이지
-│   └── page.tsx             # Home - 일정 메인화면
+├── app/                    # Next.js 앱 라우터
+│   └── page.tsx           # 메인 홈페이지 (일정 관리 화면)
 │
-├── hooks/                   # 커스텀 훅
 │
-├── store/                   # Zustand 상태 관리
+├── store/                  # Zustand 전역 상태 관리
+│   └── ...                # 상태 저장소 정의
 │
-├── service/                 # Supabase API 연동 서비스
+├── service/               # Supabase 백엔드 연동
+│   └── ...               # API 호출, 데이터 처리 로직
 │
-├── types/                   # 타입 정의
 │
-├── lib/                     # 외부 라이브러리 관련
+├── lib/                   # 외부 라이브러리 설정
+│   └── ...               # 라이브러리 초기화, 설정 등
 │
-├── func/                    # 유틸 함수
+├── func/                  # 유틸리티 함수
+│   └── ...               # 헬퍼 함수, 공용 로직
 │
-└── assets/                  # 정적 자산
-    ├── images/
-    └── css/
-        └── globals.css# cal
+└── assets/               # 정적 리소스
+    ├── images/          # 이미지 파일
+    └── css/            # 스타일시트
+        └── globals.css  # 전역 CSS 스타일
+
+```

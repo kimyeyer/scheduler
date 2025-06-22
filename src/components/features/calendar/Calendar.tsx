@@ -1,3 +1,4 @@
+'use client'
 import React, { useMemo, useState } from 'react'
 import { getMonthArray, getWeekArray } from './calendarFunc';
 import { format, isToday, isSameDay } from 'date-fns';
